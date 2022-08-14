@@ -11,12 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      schedule.belongsTo(models.airport,{foreignKey:'airport_id'})
+      schedule.belongsToMany(models.plane,{through: models.planeschedule})
     }
   }
   schedule.init({
     timeArrivePlane: DataTypes.DATE,
     timeDeparturePlane: DataTypes.DATE,
-    airport_id: DataTypes.INTEGER
+    airport_id: DataTypes.INTEGER,
+    plane_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'schedule',

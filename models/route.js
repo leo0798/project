@@ -11,10 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      route.belongsTo(models.airport,{foreignKey:'airport_id'})
+      route.belongsTo(models.plane,{foreignKey:'plane_id'})
     }
   }
   route.init({
-    airport_id: DataTypes.INTEGER
+    airport_id: DataTypes.INTEGER,
+    plane_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'route',

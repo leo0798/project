@@ -1,12 +1,20 @@
-const {airport} =require('../models')
+const {airport,plane} =require('../models')
 
 
 class AirportController{
-    static listairport(req, res){
+    static async listairport(req, res){
+        try{
+            let airports = await airport.findAll()
+            
+           // res.json(airports)
+            res.render('airport.ejs', {airports})
 
+        }catch(err){
+            res.json(err)
+        }
     }
 
-    static createairport(req, res){
+    static async createairport(req, res){
 
     }
 
@@ -17,7 +25,7 @@ class AirportController{
                 name,location
             })
 
-            //let resultairport= await route.create({})
+            //let resultPlane= await plane.create({})
 
 
             res.json(resultAirport)
@@ -27,6 +35,54 @@ class AirportController{
         
     }
 
+    static async updatePage(req, res){
+
+    }
+
+    static async update(req, res){
+        try{
+            const id = +req.params.id
+            const {name, location} = req.body
+
+            let result = await airport.update({
+                name, location
+            },{
+                where: {id}
+            })
+
+            result[0] === 1 ?
+            res.json({
+                message:`airport with id ${id} has update`
+            }):
+            res.json({
+                message:`id ${id} not update`
+            })
+
+        }catch(err){
+            res.json(err)
+        }
+
+    }
+    static async delete(req, res){
+        try{
+            const id = +req.params.id
+
+            let result = await airport.destroy({
+                where: {id}
+            })
+
+            result === 1 ?
+            res.json({
+                message:`airport with id ${id} has deleted`
+            }):
+            res.json({
+                message:`id ${id}  not deleted`
+            })
+
+        }catch(err){
+            res.json(err)
+        }
+    }
 
 }
 
