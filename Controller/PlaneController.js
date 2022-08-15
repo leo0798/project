@@ -17,7 +17,7 @@ class PlaneController{
     }
 
     static async createplane(req, res){
-
+        res.render('addplane.ejs')
 
     }
 
@@ -30,7 +30,8 @@ class PlaneController{
 
             //let resultSchedule= await schedule.create({})
 
-            res.json(resultPlane)
+            //res.json(resultPlane)
+            res.redirect('/plane')
 
         }catch(err){
             res.json(err)
@@ -73,13 +74,15 @@ class PlaneController{
                 where: {id}
             })
 
-            result === 1 ?
-            res.json({
-                message:`id ${id} deleted`
-            }):
-            res.json({
-                message:`id ${id}  not deleted`
-            })
+            // result === 1 ?
+            // res.json({
+            //     message:`id ${id} deleted`
+            // }):
+            // res.json({
+            //     message:`id ${id}  not deleted`
+            // })
+            res.redirect('/plane')
+
 
         }catch(err){
             res.json(err)

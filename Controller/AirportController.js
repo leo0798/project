@@ -15,7 +15,7 @@ class AirportController{
     }
 
     static async createairport(req, res){
-
+        res.render('addairport.ejs')
     }
 
     static async create(req, res){
@@ -26,9 +26,8 @@ class AirportController{
             })
 
             //let resultPlane= await plane.create({})
-
-
-            res.json(resultAirport)
+            //res.json(resultAirport)
+            res.redirect('/airport')
         }catch(err){
             res.json(err)
         }
@@ -71,13 +70,14 @@ class AirportController{
                 where: {id}
             })
 
-            result === 1 ?
-            res.json({
-                message:`airport with id ${id} has deleted`
-            }):
-            res.json({
-                message:`id ${id}  not deleted`
-            })
+            // result === 1 ?
+            // res.json({
+            //     message:`airport with id ${id} has deleted`
+            // }):
+            // res.json({
+            //     message:`id ${id}  not deleted`
+            // })
+            res.redirect('/airport')
 
         }catch(err){
             res.json(err)
