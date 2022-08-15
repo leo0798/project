@@ -8,7 +8,9 @@ class ScheduleController{
                 include:[plane]
             })
 
-            res.json(schedules)
+            //res.json(schedules)
+            res.render('schedule.ejs', {schedules})
+
         }catch(err){
             res.json(err)
         }
